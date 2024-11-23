@@ -1,0 +1,4 @@
+.circleci
+.gitignore
+src-tauri/.gitignore
+README.md
