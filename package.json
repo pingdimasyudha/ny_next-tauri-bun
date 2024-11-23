@@ -1,11 +1,25 @@
 {
   "name": "next-tauri-bun",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "build:android": "bun tauri android build --apk",
+    "build:desktop": "bun tauri build",
+    "build:ios": "bun tauri ios build --export-method app-store-connect",
+    "build:mac": "bun tauri build --bundles dmg",
+    "build:win-amd64": "bun tauri build --runner cargo-xwin --target x86_64-pc-windows-msvc",
+    "build:win-arm64": "bun tauri build --runner cargo-xwin --target aarch64-pc-windows-msvc",
+    "clean": "rm -rf ./.next ./build ./out ./src-tauri/gen ./src-tauri/target",
+    "init:android": "rustup target add aarch64-linux-android armv7-linux-androideabi i686-linux-android x86_64-linux-android && bun run tauri android init",
+    "init:desktop": "cargo install --locked cargo-xwin && rustup target add x86_64-pc-windows-msvc i686-pc-windows-msvc aarch64-pc-windows-msvc",
+    "init:ios": "rustup target add aarch64-apple-ios x86_64-apple-ios aarch64-apple-ios-sim && bun run tauri ios init",
+    "out": "mkdir -p ./out && find ./src-tauri -type f \\( -name '*.apk' -o -name '*-setup.exe' -o -name '*.dmg' -o -name '*.deb' -o -name '*.rpm' \\) -exec mv -v {} ./out/ \\;",
     "start": "next start",
+    "start:android": "bun tauri android dev",
+    "start:desktop": "bun tauri dev",
+    "start:ios": "bun tauri ios dev",
     "lint": "next lint"
   },
   "dependencies": {
