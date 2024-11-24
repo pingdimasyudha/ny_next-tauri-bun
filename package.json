@@ -1,6 +1,17 @@
 {
   "name": "next-tauri-bun",
   "version": "1.0.0",
+  "description": "A versatile, cross-platform application crafted using Next.js, Tauri, and Bun, designed for multi-architecture compatibility",
+  "author": {
+    "name": "Dimas Yudha Pratama",
+    "email": "ping@dimasyudha.com",
+    "url": "https://dimasyudha.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pingdimasyudha/ny_next-tauri-bun"
+  },
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
