@@ -20,6 +20,7 @@
     "build:desktop": "bun tauri build",
     "build:ios": "bun tauri ios build --export-method app-store-connect",
     "build:mac": "bun tauri build --bundles dmg",
+    "build:web": "export NEXT_OUTPUT='standalone' && export NEXT_DIST_DIR='.next' && bun run build && mkdir -p ./build && cp -rf ./.next/static ./.next/standalone/.next && cp -rf ./public ./.next/standalone && cp -Rf ./.next/standalone/ ./build",
     "build:win-amd64": "bun tauri build --runner cargo-xwin --target x86_64-pc-windows-msvc",
     "build:win-arm64": "bun tauri build --runner cargo-xwin --target aarch64-pc-windows-msvc",
     "clean": "rm -rf ./.next ./build ./out ./src-tauri/gen ./src-tauri/target",
@@ -31,6 +32,7 @@
     "start:android": "bun tauri android dev",
     "start:desktop": "bun tauri dev",
     "start:ios": "bun tauri ios dev",
+    "start:web": "bun ./build/server.js",
     "lint": "next lint"
   },
   "dependencies": {
