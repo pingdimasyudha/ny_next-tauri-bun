@@ -1,5 +1,6 @@
 .circleci
 .gitignore
+.infra
 src-tauri/.gitignore
 README.md
 LICENSE
