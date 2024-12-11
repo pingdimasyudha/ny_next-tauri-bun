@@ -1,18 +1,18 @@
-# docker buildx build -f Dockerfile.base -t pingdimasyudha/next-tauri-bun:2.0-1.0.0 -t pingdimasyudha/next-tauri-bun:latest --push --builder cloud-pingdimasyudha-pingdimasyudha --platform=linux/amd64,linux/arm64 .
-# 12.7-slim
-FROM debian@sha256:36e591f228bb9b99348f584e83f16e012c33ba5cad44ef5981a1d7c0a93eca22
+# docker buildx build -f Dockerfile.base -t pingdimasyudha/next-tauri-bun:2.0-1.1.0 -t pingdimasyudha/next-tauri-bun:latest --push --builder cloud-pingdimasyudha-pingdimasyudha --platform=linux/amd64,linux/arm64 .
+# 12.8-slim
+FROM debian@sha256:1537a6a1cbc4b4fd401da800ee9480207e7dc1f23560c21259f681db56768f63
 ARG ANDROID_BUILDTOOLS_VERSION=35.0.0 \
     ANDROID_NDK_VERSION=27.2.12479018 \
     ANDROID_PLATFORMS_VERSION=35 \
-    BUN_VERSION=1.1.36 \
+    BUN_VERSION=1.1.38 \
     CMDLINE_VERSION=11076708 \
-    JAVA_VERSION=21.0.5.11.1 \
-    MISE_VERSION=2024.11.15\
+    JAVA_VERSION=21.0.2 \
+    MISE_VERSION=2024.12.5 \
     RCLONE_VERSION=1.68.2 \
-    RUST_VERSION=1.82.0
+    RUST_VERSION=1.83.0
 
 ENV ANDROID_HOME=/root/Android/sdk \
-    JAVA_HOME=/root/.local/share/mise/installs/java/corretto-${JAVA_VERSION} \
+    JAVA_HOME=/root/.local/share/mise/installs/java/graalvm-community-${JAVA_VERSION} \
     NDK_HOME=/root/Android/sdk/ndk/${ANDROID_NDK_VERSION} \
     PATH=/root/.local/share/mise/shims:$PATH
 
@@ -45,11 +45,11 @@ RUN apt-get install -y build-essential \
 RUN curl -L "https://github.com/jdx/mise/releases/download/v${MISE_VERSION}/mise-v${MISE_VERSION}-linux-$(dpkg --print-architecture | awk '{print ($1 == "amd64") ? "x64" : $1}')" -o /usr/local/bin/mise \
     && chmod +x /usr/local/bin/mise \
     && mise install -y bun@${BUN_VERSION} \
-                       java@corretto-${JAVA_VERSION} \
+                       java@graalvm-community-${JAVA_VERSION} \
                        rclone@${RCLONE_VERSION} \
                        rust@${RUST_VERSION} \
     && mise global bun@${BUN_VERSION} \
-                   java@corretto-${JAVA_VERSION} \
+                   java@graalvm-community-${JAVA_VERSION} \
                    rclone@${RCLONE_VERSION} \
                    rust@${RUST_VERSION} \
     && rustup default stable \

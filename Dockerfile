@@ -1,7 +1,14 @@
 # 1.1.36-alpine
 FROM oven/bun@sha256:937b2625ab04b95531cb776a7dd39970ede04b406b63f964654edc67308900b2 AS builder
 ARG TINI_VERSION=0.19.0
-ADD https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini-static /tini
+ADD --chmod=0755 https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini-static /tini
+
+RUN addgroup -g 10001 \
+             -S nonroot \
+    && adduser -G nonroot \
+               -h /home/nonroot nonroot \
+               -S \
+               -u 10000
 
 WORKDIR /home/nonroot
 
