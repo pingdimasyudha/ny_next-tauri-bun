@@ -1,27 +1,53 @@
 {
   "name": "next-tauri-bun",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "",
+  "author": {
+    "name": "Dimas Yudha Pratama",
+    "email": "ping@dimasyudha.com",
+    "url": "https://dimasyudha.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pingdimasyudha/next-tauri-bun.git"
+  },
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build:android": "bun tauri android build",
+    "build:desktop": "bun tauri build",
+    "build:ios": "bun tauri ios build",
+    "build:web": "NEXT_OUTPUT=standalone bun run build && cp -rf public build/standalone && cp -rf build/static build/standalone/.next",
+    "build:win-amd64": "bun tauri build --runner cargo-xwin --target x86_64-pc-windows-msvc",
+    "build:win-arm64": "bun tauri build --runner cargo-xwin --target aarch64-pc-windows-msvc",
+    "clean": "rm -rf .next build out src-tauri/gen",
+    "init:android": "bun tauri android init",
+    "init:ios": "bun tauri ios init",
+    "lint": "next lint",
+    "out": "mkdir -p out && find . -type f \\( -name \"*-setup.exe\" -o -name \"*.apk\" -o -name \"*.dmg\" -o -name \"*.ipa\" -o -name \"*.deb\" -o -name \"*.rpm\" \\) -not -path \"*/out/*\" -exec mv {} out \\;",
+    "start": "next dev --turbopack",
+    "start:android": "bun tauri android dev",
+    "start:desktop": "bun tauri dev",
+    "start:ios": "bun tauri ios dev",
+    "start:web": "bun build/standalone/server.js"
   },
   "dependencies": {
+    "@tauri-apps/api": "^2.1.1",
+    "next": "15.1.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "next": "15.1.0"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
+    "@tauri-apps/cli": "^2.1.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
     "eslint": "^9",
     "eslint-config-next": "15.1.0",
-    "@eslint/eslintrc": "^3"
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
   }
 }
